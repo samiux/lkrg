@@ -2,8 +2,7 @@
 # install Linux Kernel Runtime Guard (lkrg) 0.9.1 with dkms
 
 # install dkms when necessary
-IF_EXIST=$(apt search dkms | grep -xqFe "installed")
-if $IF_EXIST
+if [ -f /usr/sbin/dkms ]
 then
 	echo "dkms is installed!"
 else
