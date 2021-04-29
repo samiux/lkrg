@@ -21,6 +21,25 @@ sudo ./lkrg-0.9.1-install
 sudo chmod +x lkrg-0.9.1-uninstall
 sudo ./lkrg-0.9.1-uninstall
 ```
+
+## Stop LKRG
+
+```bash
+sudo systemctl stop lkrg
+```
+
+## Start or Restart LKRG
+
+```bash
+sudo systemctl start lkrg
+
+sudo systemctl restart lkrg
+```
+
+## Known Issues
+
+- Virtualbox guest cannot be ran properly.  Unless you stops the LKRG.  
+
 ## Reference 
 
 - [LKRG - Linux Kernel Runtime Guard -- Openwall (Developer)](https://www.openwall.com/lkrg/)  
