@@ -1,0 +1,65 @@
+#!/bin/bash
+# install Linux Kernel Runtime Guard (lkrg) 0.9.1 with dkms
+
+# install dkms when necessary
+IF_EXIST=$(apt search dkms | grep -xqFe "installed")
+if $IF_EXIST
+then
+	echo "dkms is installed!"
+else
+	sudo apt -y install dkms
+fi
+
+wget https://www.openwall.com/signatures/openwall-offline-signatures.asc
+gpg --import openwall-offline-signatures.asc
+wget https://www.openwall.com/lkrg/lkrg-0.9.1.tar.gz.sign
+wget https://www.openwall.com/lkrg/lkrg-0.9.1.tar.gz
+gpg --verify lkrg-0.9.1.tar.gz.sign lkrg-0.9.1.tar.gz
+
+# install source code
+sudo mkdir -p /var/lib/dkms/lkrg/0.9.1/source/
+sudo tar -xvzf lkrg-0.9.1.tar.gz --directory /var/lib/dkms/lkrg/0.9.1/
+sudo rm lkrg-0.9.1.tar.gz
+sudo cp -R /var/lib/dkms/lkrg/0.9.1/lkrg-0.9.1/* /var/lib/dkms/lkrg/0.9.1/source/
+sudo rm -R /var/lib/dkms/lkrg/0.9.1/lkrg-0.9.1
+
+# remove unnecessary files
+sudo rm *.asc
+sudo rm *.sign
+
+# create dkms.conf
+sudo touch /var/lib/dkms/lkrg/0.9.1/source/dkms.conf
+sudo cat >> /var/lib/dkms/lkrg/0.9.1/source/dkms.conf <<END
+PACKAGE_NAME="lkrg"
+
+PACKAGE_VERSION="0.9.1"
+
+BUILT_MODULE_LOCATION[0]="output"
+BUILT_MODULE_NAME[0]="p_lkrg"
+
+DEST_MODULE_LOCATION[0]="/extra"
+DEST_MODULE_NAME[0]="p_lkrg"
+
+AUTOINSTALL="yes"
+
+ENOUGH_RAM="1950"
+total_ram="\$(free -m | sed  -n -e '/^Mem:/s/^[^0-9]*\([0-9]*\) .*/\1/p')"
+if [ "\$total_ram" -ge "\$ENOUGH_RAM" ]; then
+   true "INFO: Enough RAM available. Not lowering compilation cores."
+else
+   true "INFO: Not enough RAM available. Lowering compilation cores to 1."
+   use_cores="-j1"
+fi
+
+MAKE[0]="make all $use_cores && make install"
+CLEAN[0]="make clean"
+END
+
+# compile and install lkrg
+sudo dkms install lkrg/0.9.1
+
+# start and enable lkrg
+sudo systemctl start lkrg
+sudo systemctl enable lkrg
+
+# install ended
