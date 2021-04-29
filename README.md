@@ -1,5 +1,13 @@
 # Linux Kernel Runtime Guard (LKRG) Install Script
 
+## Download scripts
+
+```bash
+sudo apt install git
+git clone https://github.com/samiux/lkrg
+cd lkrg
+```
+
 ## Install Version 0.9.1 for Ubuntu 20.04 LTS
 
 ```bash
@@ -13,3 +21,9 @@ sudo ./lkrg-0.9.1-install
 sudo chmod +x lkrg-0.9.1-uninstall
 sudo ./lkrg-0.9.1-uninstall
 ```
+## Reference 
+
+- [LKRG - Linux Kernel Runtime Guard -- Openwall (Developer)](LKRG - Linux Kernel Runtime Guard)  
+- [LKRG - Linux Kernel Runtime Guard -- GitHub](https://github.com/openwall/lkrg)  
+- [Linux Kernel Runtime Guard -- LinuxReviews](https://linuxreviews.org/Linux_Kernel_Runtime_Guard)  
+- [Linux Kernel Runtime Guard 0.9.1 Is Released -- LinuxReviews](https://linuxreviews.org/Linux_Kernel_Runtime_Guard_0.9.1_Is_Released)  
