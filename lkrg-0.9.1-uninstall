@@ -1,4 +1,8 @@
 #!/bin/bash
+# Linux Kernel Runtime Guard (LKRG) Uninstall Script
+# Author    : Samiux (https://samiux.github.io)
+# Date      : May 2, 2021
+# Version   : 0.9.1
 
 cd /var/lib/dkms/lkrg/0.9.1/source
 sudo systemctl stop lkrg

@@ -1,5 +1,8 @@
 #!/bin/bash
-# install Linux Kernel Runtime Guard (lkrg) 0.9.1 with dkms
+# install Linux Kernel Runtime Guard (lkrg) Install Script (with dkms)
+# Author    : Samiux (https://samiux.github.io)
+# Date      : May 2, 2021
+# Version   : 0.9.1
 
 # install dkms when necessary
 if [ -f /usr/sbin/dkms ]
@@ -54,10 +57,18 @@ MAKE[0]="make all $use_cores && make install"
 CLEAN[0]="make clean"
 END
 
+# check if Virtualbox is installed
+# if yes, "p_lkrg" will loads with "pcfi_validate=1"
+if [ -f /usr/bin/vboxmanage ]
+then
+	sudo sed -i 's/ExecStart=\/sbin\/modprobe \-v p\_lkrg/ExecStart=\/sbin\/modprobe \-v p\_lkrg pcfi\_validate\=1/g' /var/lib/dkms/lkrg/0.9.1/source/scripts/bootup/systemd/lkrg.service
+fi
+
 # compile and install lkrg
 sudo dkms install lkrg/0.9.1
 
 # start and enable lkrg
+sudo systemctl daemon-reload
 sudo systemctl start lkrg
 sudo systemctl enable lkrg
 

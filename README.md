@@ -38,7 +38,7 @@ sudo systemctl restart lkrg
 
 ## Known Issues
 
-- Virtualbox guest cannot be ran properly.  Unless you stops the LKRG.  
+- Nil  
 
 ## Reference 
 
