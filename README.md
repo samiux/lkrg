@@ -1,6 +1,16 @@
 # Linux Kernel Runtime Guard (LKRG) Install Script
 
-## Download scripts
+Linux Kernel Runtime Guard (LKRG) is developed by Openwall team.  LKRG can prevent and/or detect the Linux kernelspace exploit.  However, the Userspace exploit cannot be detected or prevented, such as DirtyC0W exploit even it use the kernel for the exploit.
+
+Be keep in mind that LKRG may be/can be bypassed like other programs.
+
+These scripts can install/uninstall LKRG on Ubuntu Linux (or debain based) with ease.  It uses DKMS that it will be recompiled automatically when new Linux kernel is installed.
+
+These scripts are released under GPLv3 License by Samiux and it is free of charge.
+
+The current scripts are for LKRG version 0.9.1.
+
+## Download LKRG
 
 ```bash
 sudo apt install git
@@ -8,14 +18,14 @@ git clone https://github.com/samiux/lkrg
 cd lkrg
 ```
 
-## Install Version 0.9.1 for Ubuntu 20.04 LTS
+## Install LKRG
 
 ```bash
 sudo chmod +x lkrg-0.9.1-install
 sudo ./lkrg-0.9.1-install
 ```
 
-## Uninstall Version 0.9.1 for Ubuntu 20.04 LTS
+## Uninstall LKRG
 
 ```bash
 sudo chmod +x lkrg-0.9.1-uninstall
@@ -38,7 +48,7 @@ sudo systemctl restart lkrg
 
 ## Known Issues
 
-- Nil  
+- If Virtualbox is installed after the installation of LKRG, it is required to uninstall and reinstall LKRG; otherwises, Virtualbox will not working properly.  
 
 ## Reference 
 
