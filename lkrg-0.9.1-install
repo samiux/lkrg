@@ -53,7 +53,7 @@ else
    use_cores="-j1"
 fi
 
-MAKE[0]="make all $use_cores && make install"
+MAKE[0]="make uninstall && make all $use_cores && make install && systemctl enable lkrg.service && systemctl restart lkrg.service"
 CLEAN[0]="make clean"
 END
 
