@@ -1,5 +1,7 @@
 # Linux Kernel Runtime Guard (LKRG) Install Script
 
+## DISCONTINUED - Deprecated (LKRG is no longer compatable with Ubuntu 20.04.2 LTS or above anymore)
+
 Linux Kernel Runtime Guard (LKRG) is developed by Openwall team.  LKRG can prevent and/or detect the Linux kernelspace exploit.  However, the userspace exploit cannot be detected or prevented, such as DirtyC0W exploit even it uses the kernel for the exploit.
 
 Be keep in mind that LKRG may be/can be bypassed like other programs.
